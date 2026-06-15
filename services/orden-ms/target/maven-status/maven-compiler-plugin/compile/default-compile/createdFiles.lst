@@ -1,0 +1,10 @@
+com\upeu\orden\dto\OrdenEventoDto.class
+com\upeu\orden\controller\OrdenController.class
+com\upeu\orden\dto\OrdenEventoDto$OrdenEventoDtoBuilder.class
+com\upeu\orden\service\OrdenService.class
+com\upeu\orden\repository\OrdenRepository.class
+com\upeu\orden\entity\Orden.class
+com\upeu\orden\dto\OrdenRequest.class
+com\upeu\orden\kafka\OrdenProducer.class
+com\upeu\orden\entity\Orden$OrdenBuilder.class
+com\upeu\orden\OrdenApplication.class

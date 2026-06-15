@@ -1,0 +1,16 @@
+name: orden-ms-dev
+
+services:
+  mysql-orden-dev:
+    image: mysql:8.4
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db_orden
+    ports:
+      - "3397:3306"
+    volumes:
+      - mysql_orden_dev_data:/var/lib/mysql
+
+volumes:
+  mysql_orden_dev_data:
