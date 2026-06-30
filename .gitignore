@@ -1,0 +1,47 @@
+# Maven
+target/
+**/target/
+
+# Logs
+logs/
+**/logs/
+*.log
+*.log.*
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Maven wrapper
+.mvn/
+mvnw
+mvnw.cmd
+
+# Node
+node_modules/
+dist/
+npm-debug.log
+yarn-error.log
+
+# Build
+build/
+
+# Temporary
+*.tmp
+*.swp
+*.swo
+
+# Other
+*.class
+*.log.gz
