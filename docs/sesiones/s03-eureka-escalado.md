@@ -20,3 +20,15 @@ docker run -d -p 8761:8761 registry-server
 Entregables
 -----------
 - Instrucciones para comprobar instancias en `http://localhost:8761`.
+
+Proyecto (este repo)
+---------------------
+El `registry-server` se encuentra en `registry-server/`. Al arrancarlo, podrás ver los servicios registrados (si están levantados) en `http://localhost:8761`.
+
+Comando rápido:
+```
+cd registry-server
+./mvnw spring-boot:run
+```
+
+Resumen de servicios y endpoints: `docs/sesiones/_project_summary.md`.

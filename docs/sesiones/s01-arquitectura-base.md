@@ -31,3 +31,13 @@ Entregables
 -----------
 - Documento de la arquitectura en `docs/sesiones/s01-arquitectura-base.md`.
 - Diagrama y lista de endpoints principales.
+
+Proyecto (este repo)
+---------------------
+Este repositorio contiene los siguientes servicios principales: `auth`, `producto`, `carrito`, `categoria`, `media`, `orden-ms`, `pago`, `pedido` y el frontend `erpng`.
+
+- Levantar todo con Docker Compose: `cd infra && docker-compose up -d`.
+- Ejecutar un servicio Java: `cd services/<servicio> && ./mvnw spring-boot:run`.
+- Frontend: `cd erpng && npm install && npm start`.
+
+Para un resumen rápido de endpoints y comandos, ver `docs/sesiones/_project_summary.md`.

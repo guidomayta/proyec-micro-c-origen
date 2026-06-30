@@ -15,3 +15,9 @@ Arranque de observabilidad
 cd observability
 docker-compose up -d
 ```
+
+Proyecto (este repo)
+---------------------
+La carpeta `observability/` incluye `prometheus`, `grafana` y `loki` para métricas y logs. Asegura que los servicios exponen endpoints de `actuator` y Prometheus (`/actuator/prometheus`).
+
+Resumen: `docs/sesiones/_project_summary.md`.

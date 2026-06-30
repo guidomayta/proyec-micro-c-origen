@@ -14,3 +14,9 @@ Arranque de Kafka (carpeta `kafka`):
 cd kafka
 docker-compose up -d
 ```
+
+Proyecto (este repo)
+---------------------
+La carpeta `kafka/` contiene la configuración para los brokers y topics utilizados por servicios de eventos. Asegúrate de comprobar los topics necesarios para `orden` y `pago`.
+
+Resumen: `docs/sesiones/_project_summary.md`.

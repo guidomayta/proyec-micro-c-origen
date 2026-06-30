@@ -13,3 +13,11 @@ Ejemplo: run collection con Newman
 ```powershell
 npx newman run postman-collection.json
 ```
+
+Proyecto (este repo)
+---------------------
+Pruebas end-to-end disponibles mediante `postman-collection.json` en la raíz del repo. Flujos clave:
+- Login y obtención de token (`POST /auth/login`).
+- Añadir items al carrito y crear pedido (`POST /api/v1/carritos/...`, `POST /api/v1/pedidos`).
+
+Resumen: `docs/sesiones/_project_summary.md`.

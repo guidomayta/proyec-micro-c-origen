@@ -24,3 +24,12 @@ cd config-server
 Entregables
 -----------
 - Guía de configuración y ejemplos de `application-{profile}.yml`.
+
+Proyecto (este repo)
+---------------------
+El `config-server` está en la carpeta `config-server/`. Se usa `spring.cloud.config` en los servicios para obtener propiedades remotas.
+
+- Variables sensibles: revisar `.env` y `config-repo/` en `infra/config-repo` para plantillas de configuración.
+- Ejecutar: `cd config-server && ./mvnw spring-boot:run`.
+
+Resumen de endpoints y ejecución: `docs/sesiones/_project_summary.md`.

@@ -12,3 +12,9 @@ Objetivos
 Comprobación
 ------------
 - Revisar clases `*Client` en los microservicios y añadir `@FeignClient`.
+
+Proyecto (este repo)
+---------------------
+Revisa en los servicios que consumen otros microservicios (por ejemplo `pedido` puede invocar `carrito`/`pago`). Añade `@FeignClient` y configura `Resilience4j` para circuit breaker si es necesario.
+
+Resumen y ejemplos: `docs/sesiones/_project_summary.md`.

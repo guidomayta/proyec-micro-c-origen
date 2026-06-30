@@ -1,0 +1,90 @@
+﻿[
+    {
+        "name":  "auth",
+        "hasPom":  true,
+        "hasPackage":  false,
+        "hasDocker":  true,
+        "hasReadme":  true,
+        "hasSrc":  true
+    },
+    {
+        "name":  "carrito",
+        "hasPom":  true,
+        "hasPackage":  false,
+        "hasDocker":  true,
+        "hasReadme":  false,
+        "hasSrc":  true
+    },
+    {
+        "name":  "categoria",
+        "hasPom":  true,
+        "hasPackage":  false,
+        "hasDocker":  true,
+        "hasReadme":  false,
+        "hasSrc":  true
+    },
+    {
+        "name":  "erpng",
+        "hasPom":  false,
+        "hasPackage":  true,
+        "hasDocker":  false,
+        "hasReadme":  true,
+        "hasSrc":  true
+    },
+    {
+        "name":  "kafka",
+        "hasPom":  false,
+        "hasPackage":  false,
+        "hasDocker":  false,
+        "hasReadme":  true,
+        "hasSrc":  false
+    },
+    {
+        "name":  "media",
+        "hasPom":  true,
+        "hasPackage":  false,
+        "hasDocker":  true,
+        "hasReadme":  false,
+        "hasSrc":  true
+    },
+    {
+        "name":  "observability",
+        "hasPom":  false,
+        "hasPackage":  false,
+        "hasDocker":  false,
+        "hasReadme":  true,
+        "hasSrc":  false
+    },
+    {
+        "name":  "orden-ms",
+        "hasPom":  true,
+        "hasPackage":  false,
+        "hasDocker":  false,
+        "hasReadme":  false,
+        "hasSrc":  true
+    },
+    {
+        "name":  "pago",
+        "hasPom":  true,
+        "hasPackage":  false,
+        "hasDocker":  true,
+        "hasReadme":  false,
+        "hasSrc":  true
+    },
+    {
+        "name":  "pedido",
+        "hasPom":  true,
+        "hasPackage":  false,
+        "hasDocker":  true,
+        "hasReadme":  false,
+        "hasSrc":  true
+    },
+    {
+        "name":  "producto",
+        "hasPom":  true,
+        "hasPackage":  false,
+        "hasDocker":  true,
+        "hasReadme":  false,
+        "hasSrc":  true
+    }
+]
