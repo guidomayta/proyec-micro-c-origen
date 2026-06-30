@@ -1,3 +1,4 @@
+D:\MS1\ProyectoGrupal\services\orden-ms\src\main\java\com\upeu\orden\config\SecurityConfig.java
 D:\MS1\ProyectoGrupal\services\orden-ms\src\main\java\com\upeu\orden\controller\OrdenController.java
 D:\MS1\ProyectoGrupal\services\orden-ms\src\main\java\com\upeu\orden\dto\OrdenEventoDto.java
 D:\MS1\ProyectoGrupal\services\orden-ms\src\main\java\com\upeu\orden\dto\OrdenRequest.java
@@ -5,4 +6,5 @@ D:\MS1\ProyectoGrupal\services\orden-ms\src\main\java\com\upeu\orden\entity\Orde
 D:\MS1\ProyectoGrupal\services\orden-ms\src\main\java\com\upeu\orden\kafka\OrdenProducer.java
 D:\MS1\ProyectoGrupal\services\orden-ms\src\main\java\com\upeu\orden\OrdenApplication.java
 D:\MS1\ProyectoGrupal\services\orden-ms\src\main\java\com\upeu\orden\repository\OrdenRepository.java
+D:\MS1\ProyectoGrupal\services\orden-ms\src\main\java\com\upeu\orden\security\KeycloakRoleConverter.java
 D:\MS1\ProyectoGrupal\services\orden-ms\src\main\java\com\upeu\orden\service\OrdenService.java

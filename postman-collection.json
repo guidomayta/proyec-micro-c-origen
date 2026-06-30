@@ -1,0 +1,521 @@
+{
+  "info": {
+    "name": "C Origen — Microservicios",
+    "_postman_id": "corigenms-2026",
+    "description": "Colección completa para ProyectoGrupal UPEU. Gateway: localhost:7091",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "BASE", "value": "http://localhost:7091", "type": "string" },
+    { "key": "TOKEN", "value": "", "type": "string" },
+    { "key": "KEYCLOAK", "value": "http://localhost:8080", "type": "string" }
+  ],
+  "item": [
+
+    {
+      "name": "🔐 Auth — Keycloak",
+      "item": [
+        {
+          "name": "Login ADMIN (obtener token)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "if (res.access_token) {",
+                  "  pm.collectionVariables.set('TOKEN', res.access_token);",
+                  "  console.log('Token guardado correctamente');",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/x-www-form-urlencoded" }],
+            "url": { "raw": "{{KEYCLOAK}}/realms/upeu/protocol/openid-connect/token", "host": ["{{KEYCLOAK}}"], "path": ["realms","upeu","protocol","openid-connect","token"] },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                { "key": "grant_type", "value": "password" },
+                { "key": "client_id",  "value": "microservices-app" },
+                { "key": "username",   "value": "admin" },
+                { "key": "password",   "value": "admin123" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Login USER (obtener token)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "if (res.access_token) {",
+                  "  pm.collectionVariables.set('TOKEN', res.access_token);",
+                  "  console.log('Token guardado correctamente');",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/x-www-form-urlencoded" }],
+            "url": { "raw": "{{KEYCLOAK}}/realms/upeu/protocol/openid-connect/token", "host": ["{{KEYCLOAK}}"], "path": ["realms","upeu","protocol","openid-connect","token"] },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                { "key": "grant_type", "value": "password" },
+                { "key": "client_id",  "value": "microservices-app" },
+                { "key": "username",   "value": "user" },
+                { "key": "password",   "value": "user123" }
+              ]
+            }
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "📦 Productos",
+      "item": [
+        {
+          "name": "Listar todos los productos",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{TOKEN}}" }],
+            "url": { "raw": "{{BASE}}/api/v1/productos", "host": ["{{BASE}}"], "path": ["api","v1","productos"] }
+          }
+        },
+        {
+          "name": "Buscar producto por ID",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{TOKEN}}" }],
+            "url": { "raw": "{{BASE}}/api/v1/productos/1", "host": ["{{BASE}}"], "path": ["api","v1","productos","1"] }
+          }
+        },
+        {
+          "name": "Buscar por categoría",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{TOKEN}}" }],
+            "url": { "raw": "{{BASE}}/api/v1/productos/categoria/Electrónica", "host": ["{{BASE}}"], "path": ["api","v1","productos","categoria","Electrónica"] }
+          }
+        },
+        {
+          "name": "Crear producto",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{TOKEN}}" },
+              { "key": "Content-Type",  "value": "application/json" }
+            ],
+            "url": { "raw": "{{BASE}}/api/v1/productos", "host": ["{{BASE}}"], "path": ["api","v1","productos"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Laptop Dell XPS\",\n  \"descripcion\": \"Intel i7, 16GB RAM, 512GB SSD\",\n  \"precio\": 3500.00,\n  \"stock\": 10,\n  \"categoria\": \"Electrónica\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Actualizar producto",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{TOKEN}}" },
+              { "key": "Content-Type",  "value": "application/json" }
+            ],
+            "url": { "raw": "{{BASE}}/api/v1/productos/1", "host": ["{{BASE}}"], "path": ["api","v1","productos","1"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Laptop Dell XPS (actualizado)\",\n  \"descripcion\": \"Intel i9, 32GB RAM\",\n  \"precio\": 4200.00,\n  \"stock\": 5,\n  \"categoria\": \"Electrónica\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Actualizar stock",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Authorization", "value": "Bearer {{TOKEN}}" }],
+            "url": { "raw": "{{BASE}}/api/v1/productos/1/stock?cantidad=20", "host": ["{{BASE}}"], "path": ["api","v1","productos","1","stock"], "query": [{ "key": "cantidad", "value": "20" }] }
+          }
+        },
+        {
+          "name": "Eliminar producto",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{TOKEN}}" }],
+            "url": { "raw": "{{BASE}}/api/v1/productos/1", "host": ["{{BASE}}"], "path": ["api","v1","productos","1"] }
+          }
+        },
+        {
+          "name": "Health check (sin token)",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{BASE}}/api/v1/productos/instancia", "host": ["{{BASE}}"], "path": ["api","v1","productos","instancia"] }
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "🏷️ Categorías",
+      "item": [
+        {
+          "name": "Listar categorías",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{TOKEN}}" }],
+            "url": { "raw": "{{BASE}}/api/v1/categorias", "host": ["{{BASE}}"], "path": ["api","v1","categorias"] }
+          }
+        },
+        {
+          "name": "Buscar categoría por ID",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{TOKEN}}" }],
+            "url": { "raw": "{{BASE}}/api/v1/categorias/1", "host": ["{{BASE}}"], "path": ["api","v1","categorias","1"] }
+          }
+        },
+        {
+          "name": "Crear categoría",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{TOKEN}}" },
+              { "key": "Content-Type",  "value": "application/json" }
+            ],
+            "url": { "raw": "{{BASE}}/api/v1/categorias", "host": ["{{BASE}}"], "path": ["api","v1","categorias"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Electrónica\",\n  \"descripcion\": \"Laptops, celulares, tablets y más\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Actualizar categoría",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{TOKEN}}" },
+              { "key": "Content-Type",  "value": "application/json" }
+            ],
+            "url": { "raw": "{{BASE}}/api/v1/categorias/1", "host": ["{{BASE}}"], "path": ["api","v1","categorias","1"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Electrónica Premium\",\n  \"descripcion\": \"Productos tecnológicos de alta gama\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Eliminar categoría",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{TOKEN}}" }],
+            "url": { "raw": "{{BASE}}/api/v1/categorias/1", "host": ["{{BASE}}"], "path": ["api","v1","categorias","1"] }
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "🛒 Carrito",
+      "item": [
+        {
+          "name": "Ver carrito del usuario",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{TOKEN}}" }],
+            "url": { "raw": "{{BASE}}/api/v1/carritos/usuario/1", "host": ["{{BASE}}"], "path": ["api","v1","carritos","usuario","1"] }
+          }
+        },
+        {
+          "name": "Agregar item al carrito",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{TOKEN}}" },
+              { "key": "Content-Type",  "value": "application/json" }
+            ],
+            "url": { "raw": "{{BASE}}/api/v1/carritos/usuario/1/items", "host": ["{{BASE}}"], "path": ["api","v1","carritos","usuario","1","items"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"productoId\": 1,\n  \"nombreProducto\": \"Laptop Dell XPS\",\n  \"cantidad\": 2,\n  \"precioUnitario\": 3500.00\n}"
+            }
+          }
+        },
+        {
+          "name": "Eliminar item del carrito",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{TOKEN}}" }],
+            "url": { "raw": "{{BASE}}/api/v1/carritos/usuario/1/items/1", "host": ["{{BASE}}"], "path": ["api","v1","carritos","usuario","1","items","1"] }
+          }
+        },
+        {
+          "name": "Vaciar carrito",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{TOKEN}}" }],
+            "url": { "raw": "{{BASE}}/api/v1/carritos/usuario/1/vaciar", "host": ["{{BASE}}"], "path": ["api","v1","carritos","usuario","1","vaciar"] }
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "📋 Pedidos",
+      "item": [
+        {
+          "name": "Listar pedidos del usuario",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{TOKEN}}" }],
+            "url": { "raw": "{{BASE}}/api/v1/pedidos/usuario/1", "host": ["{{BASE}}"], "path": ["api","v1","pedidos","usuario","1"] }
+          }
+        },
+        {
+          "name": "Buscar pedido por ID",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{TOKEN}}" }],
+            "url": { "raw": "{{BASE}}/api/v1/pedidos/1", "host": ["{{BASE}}"], "path": ["api","v1","pedidos","1"] }
+          }
+        },
+        {
+          "name": "Crear pedido",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{TOKEN}}" },
+              { "key": "Content-Type",  "value": "application/json" }
+            ],
+            "url": { "raw": "{{BASE}}/api/v1/pedidos", "host": ["{{BASE}}"], "path": ["api","v1","pedidos"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"usuarioId\": 1,\n  \"direccionEnvio\": \"Av. Los Pinos 123, Lima\",\n  \"items\": [\n    {\n      \"productoId\": 1,\n      \"nombreProducto\": \"Laptop Dell XPS\",\n      \"cantidad\": 1,\n      \"precioUnitario\": 3500.00\n    }\n  ]\n}"
+            }
+          }
+        },
+        {
+          "name": "Crear pedido desde carrito",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{TOKEN}}" }],
+            "url": { "raw": "{{BASE}}/api/v1/pedidos/desde-carrito/1?direccionEnvio=Av. Lima 456", "host": ["{{BASE}}"], "path": ["api","v1","pedidos","desde-carrito","1"], "query": [{ "key": "direccionEnvio", "value": "Av. Lima 456" }] }
+          }
+        },
+        {
+          "name": "Cambiar estado del pedido",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Authorization", "value": "Bearer {{TOKEN}}" }],
+            "url": { "raw": "{{BASE}}/api/v1/pedidos/1/estado?estado=ENVIADO", "host": ["{{BASE}}"], "path": ["api","v1","pedidos","1","estado"], "query": [{ "key": "estado", "value": "ENVIADO" }] }
+          }
+        },
+        {
+          "name": "Cancelar pedido",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{TOKEN}}" }],
+            "url": { "raw": "{{BASE}}/api/v1/pedidos/1/cancelar", "host": ["{{BASE}}"], "path": ["api","v1","pedidos","1","cancelar"] }
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "💳 Pagos",
+      "item": [
+        {
+          "name": "Listar pagos del usuario",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{TOKEN}}" }],
+            "url": { "raw": "{{BASE}}/api/v1/pagos/usuario/1", "host": ["{{BASE}}"], "path": ["api","v1","pagos","usuario","1"] }
+          }
+        },
+        {
+          "name": "Buscar pagos por pedido",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{TOKEN}}" }],
+            "url": { "raw": "{{BASE}}/api/v1/pagos/pedido/1", "host": ["{{BASE}}"], "path": ["api","v1","pagos","pedido","1"] }
+          }
+        },
+        {
+          "name": "Buscar pago por ID",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{TOKEN}}" }],
+            "url": { "raw": "{{BASE}}/api/v1/pagos/1", "host": ["{{BASE}}"], "path": ["api","v1","pagos","1"] }
+          }
+        },
+        {
+          "name": "Registrar pago",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{TOKEN}}" },
+              { "key": "Content-Type",  "value": "application/json" }
+            ],
+            "url": { "raw": "{{BASE}}/api/v1/pagos", "host": ["{{BASE}}"], "path": ["api","v1","pagos"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pedidoId\": 1,\n  \"usuarioId\": 1,\n  \"monto\": 3500.00,\n  \"metodoPago\": \"YAPE\",\n  \"referencia\": \"123456789\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Cambiar estado del pago",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Authorization", "value": "Bearer {{TOKEN}}" }],
+            "url": { "raw": "{{BASE}}/api/v1/pagos/1/estado?estado=APROBADO", "host": ["{{BASE}}"], "path": ["api","v1","pagos","1","estado"], "query": [{ "key": "estado", "value": "APROBADO" }] }
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "📦 Orden MS",
+      "item": [
+        {
+          "name": "Listar órdenes del usuario",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{TOKEN}}" }],
+            "url": { "raw": "{{BASE}}/api/v1/ordenes/usuario/1", "host": ["{{BASE}}"], "path": ["api","v1","ordenes","usuario","1"] }
+          }
+        },
+        {
+          "name": "Buscar orden por ID",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{TOKEN}}" }],
+            "url": { "raw": "{{BASE}}/api/v1/ordenes/1", "host": ["{{BASE}}"], "path": ["api","v1","ordenes","1"] }
+          }
+        },
+        {
+          "name": "Crear orden (dispara evento Kafka)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{TOKEN}}" },
+              { "key": "Content-Type",  "value": "application/json" }
+            ],
+            "url": { "raw": "{{BASE}}/api/v1/ordenes", "host": ["{{BASE}}"], "path": ["api","v1","ordenes"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"usuarioId\": 1,\n  \"productoId\": 1,\n  \"cantidad\": 2,\n  \"total\": 7000.00\n}"
+            }
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "🖼️ Media",
+      "item": [
+        {
+          "name": "Listar archivos",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{TOKEN}}" }],
+            "url": { "raw": "{{BASE}}/api/v1/media", "host": ["{{BASE}}"], "path": ["api","v1","media"] }
+          }
+        },
+        {
+          "name": "Buscar por referencia",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{TOKEN}}" }],
+            "url": { "raw": "{{BASE}}/api/v1/media/referencia/producto/1", "host": ["{{BASE}}"], "path": ["api","v1","media","referencia","producto","1"] }
+          }
+        },
+        {
+          "name": "Buscar media por ID",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{TOKEN}}" }],
+            "url": { "raw": "{{BASE}}/api/v1/media/1", "host": ["{{BASE}}"], "path": ["api","v1","media","1"] }
+          }
+        },
+        {
+          "name": "Subir archivo (form-data)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{TOKEN}}" }],
+            "url": { "raw": "{{BASE}}/api/v1/media", "host": ["{{BASE}}"], "path": ["api","v1","media"] },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "file",         "type": "file",  "src": "" },
+                { "key": "entidad",      "type": "text",  "value": "producto" },
+                { "key": "referenciaId", "type": "text",  "value": "1" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Eliminar archivo",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{TOKEN}}" }],
+            "url": { "raw": "{{BASE}}/api/v1/media/1", "host": ["{{BASE}}"], "path": ["api","v1","media","1"] }
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "🏥 Health Checks (sin token)",
+      "item": [
+        {
+          "name": "Gateway — instancia",
+          "request": { "method": "GET", "url": { "raw": "{{BASE}}/actuator/health", "host": ["{{BASE}}"], "path": ["actuator","health"] } }
+        },
+        {
+          "name": "Producto — instancia",
+          "request": { "method": "GET", "url": { "raw": "{{BASE}}/api/v1/productos/instancia", "host": ["{{BASE}}"], "path": ["api","v1","productos","instancia"] } }
+        },
+        {
+          "name": "Pedido — instancia",
+          "request": { "method": "GET", "url": { "raw": "{{BASE}}/api/v1/pedidos/instancia", "host": ["{{BASE}}"], "path": ["api","v1","pedidos","instancia"] } }
+        },
+        {
+          "name": "Pago — instancia",
+          "request": { "method": "GET", "url": { "raw": "{{BASE}}/api/v1/pagos/instancia", "host": ["{{BASE}}"], "path": ["api","v1","pagos","instancia"] } }
+        },
+        {
+          "name": "Carrito — instancia",
+          "request": { "method": "GET", "url": { "raw": "{{BASE}}/api/v1/carritos/instancia", "host": ["{{BASE}}"], "path": ["api","v1","carritos","instancia"] } }
+        },
+        {
+          "name": "Categoría — instancia",
+          "request": { "method": "GET", "url": { "raw": "{{BASE}}/api/v1/categorias/instancia", "host": ["{{BASE}}"], "path": ["api","v1","categorias","instancia"] } }
+        },
+        {
+          "name": "Orden MS — instancia",
+          "request": { "method": "GET", "url": { "raw": "{{BASE}}/api/v1/ordenes/instancia", "host": ["{{BASE}}"], "path": ["api","v1","ordenes","instancia"] } }
+        },
+        {
+          "name": "Media — instancia",
+          "request": { "method": "GET", "url": { "raw": "{{BASE}}/api/v1/media/instancia", "host": ["{{BASE}}"], "path": ["api","v1","media","instancia"] } }
+        },
+        {
+          "name": "Gateway rutas activas",
+          "request": { "method": "GET", "url": { "raw": "{{BASE}}/actuator/gateway/routes", "host": ["{{BASE}}"], "path": ["actuator","gateway","routes"] } }
+        }
+      ]
+    }
+
+  ]
+}

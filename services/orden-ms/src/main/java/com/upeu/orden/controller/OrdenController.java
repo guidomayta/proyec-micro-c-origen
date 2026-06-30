@@ -24,7 +24,12 @@ public class OrdenController {
         return service.listarPorUsuario(usuarioId);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/instancia")
+    public Map<String, String> instancia() {
+        return Map.of("servicio", "orden-ms", "status", "UP");
+    }
+
+    @GetMapping("/{id:\\d+}")
     public Orden buscarPorId(@PathVariable Long id) {
         return service.buscarPorId(id);
     }
@@ -32,10 +37,5 @@ public class OrdenController {
     @PostMapping
     public ResponseEntity<Orden> crear(@Valid @RequestBody OrdenRequest req) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.crear(req));
-    }
-
-    @GetMapping("/instancia")
-    public Map<String, String> instancia() {
-        return Map.of("servicio", "orden-ms", "status", "UP");
     }
 }
